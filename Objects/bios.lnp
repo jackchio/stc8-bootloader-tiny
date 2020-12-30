@@ -1,0 +1,4 @@
+".\Objects\main.obj" 
+TO ".\Objects\bios" 
+PRINT(".\Listings\bios.m51") RAMSIZE(256) 
+CODE( 0XF000-0XFFFF )
