@@ -242,8 +242,8 @@
               </RXB>
               <Ocm1>
                 <Type>0</Type>
-                <StartAddress>0xf000</StartAddress>
-                <Size>0x1000</Size>
+                <StartAddress>0xf800</StartAddress>
+                <Size>0x800</Size>
               </Ocm1>
               <Ocm2>
                 <Type>0</Type>
@@ -356,7 +356,7 @@
             <UserClasses></UserClasses>
             <CSection></CSection>
             <UserSection></UserSection>
-            <CodeBaseAddress>0XF000-0XFFFF</CodeBaseAddress>
+            <CodeBaseAddress>0XF800-0XFFFF</CodeBaseAddress>
             <XDataBaseAddress></XDataBaseAddress>
             <PDataBaseAddress></PDataBaseAddress>
             <BitBaseAddress></BitBaseAddress>

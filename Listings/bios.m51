@@ -1,8 +1,8 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    12/30/2020  22:25:38  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    01/02/2021  17:18:34  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
-C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\bios PRINT (.\Listings\bios.m51) RAMSIZE (256) CODE (0XF000-
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\bios PRINT (.\Listings\bios.m51) RAMSIZE (256) CODE (0XF800-
 >> 0XFFFF)
 
 
@@ -35,21 +35,21 @@ LINK MAP OF MODULE:  .\Objects\bios (MAIN)
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-                    0003H     EFFDH                  *** GAP ***
-            CODE    F000H     01A1H     UNIT         ?PR?MAIN?MAIN
-            CODE    F1A1H     00BDH     UNIT         ?PR?_EEPROM_WRITE_BOOT_AREA?MAIN
-            CODE    F25EH     008CH     UNIT         ?C_C51STARTUP
-            CODE    F2EAH     0088H     UNIT         ?C?LIB_CODE
-            CODE    F372H     0077H     UNIT         ?PR?DATA_SAVE?MAIN
-            CODE    F3E9H     006FH     UNIT         ?PR?_SEND_NUM?MAIN
-            CODE    F458H     006EH     UNIT         ?CO?MAIN
-            CODE    F4C6H     0024H     UNIT         ?PR?_EEPROM_WRITE?MAIN
-            CODE    F4EAH     0020H     UNIT         ?PR?HARD_INIT?MAIN
-            CODE    F50AH     001CH     UNIT         ?PR?_SEND_STRING?MAIN
-            CODE    F526H     0014H     UNIT         ?PR?_EEPROM_ERASE?MAIN
-            CODE    F53AH     000EH     UNIT         ?PR?EEPROM_OFF?MAIN
-            CODE    F548H     000BH     UNIT         ?PR?_SEND_DATA?MAIN
-            CODE    F553H     0009H     UNIT         ?C_INITSEG
+                    0003H     F7FDH                  *** GAP ***
+            CODE    F800H     01A1H     UNIT         ?PR?MAIN?MAIN
+            CODE    F9A1H     00BDH     UNIT         ?PR?_EEPROM_WRITE_BOOT_AREA?MAIN
+            CODE    FA5EH     008CH     UNIT         ?C_C51STARTUP
+            CODE    FAEAH     0088H     UNIT         ?C?LIB_CODE
+            CODE    FB72H     0077H     UNIT         ?PR?DATA_SAVE?MAIN
+            CODE    FBE9H     006FH     UNIT         ?PR?_SEND_NUM?MAIN
+            CODE    FC58H     006EH     UNIT         ?CO?MAIN
+            CODE    FCC6H     0024H     UNIT         ?PR?_EEPROM_WRITE?MAIN
+            CODE    FCEAH     0020H     UNIT         ?PR?HARD_INIT?MAIN
+            CODE    FD0AH     001CH     UNIT         ?PR?_SEND_STRING?MAIN
+            CODE    FD26H     0014H     UNIT         ?PR?_EEPROM_ERASE?MAIN
+            CODE    FD3AH     000EH     UNIT         ?PR?EEPROM_OFF?MAIN
+            CODE    FD48H     000BH     UNIT         ?PR?_SEND_DATA?MAIN
+            CODE    FD53H     0009H     UNIT         ?C_INITSEG
 
 
 
@@ -59,7 +59,7 @@ OVERLAY MAP OF MODULE:   .\Objects\bios (MAIN)
 SEGMENT                                    DATA_GROUP 
   +--> CALLED SEGMENT                    START    LENGTH
 --------------------------------------------------------
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/30/2020  22:25:38  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/02/2021  17:18:34  PAGE 2
 
 
 ?C_C51STARTUP                            -----    -----
@@ -101,7 +101,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\bios (MAIN)
 
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:F526H         PUBLIC        _eeprom_erase
+  C:FD26H         PUBLIC        _eeprom_erase
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
@@ -113,32 +113,32 @@ SYMBOL TABLE OF MODULE:  .\Objects\bios (MAIN)
   D:00A8H         PUBLIC        IE
   D:00C5H         PUBLIC        IAP_CMD
   D:00B8H         PUBLIC        IP
-  C:F4D4H         PUBLIC        _eeprom_write
+  C:FCD4H         PUBLIC        _eeprom_write
   B:0098H.0       PUBLIC        RI
   B:0098H.1       PUBLIC        TI
   D:00C3H         PUBLIC        IAP_ADDRH
   D:00D8H         PUBLIC        CCON
   D:00C4H         PUBLIC        IAP_ADDRL
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/30/2020  22:25:38  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/02/2021  17:18:34  PAGE 3
 
 
-  C:F000H         PUBLIC        main
-  C:F50AH         PUBLIC        _send_string
+  C:F800H         PUBLIC        main
+  C:FD0AH         PUBLIC        _send_string
   D:0014H         PUBLIC        data_count
-  C:F53AH         PUBLIC        eeprom_off
-  C:F54BH         PUBLIC        _send_data
+  C:FD3AH         PUBLIC        eeprom_off
+  C:FD4BH         PUBLIC        _send_data
   X:0000H         PUBLIC        eeprom_buf
-  C:F372H         PUBLIC        data_save
-  C:F1A1H         PUBLIC        _eeprom_write_boot_area
+  C:FB72H         PUBLIC        data_save
+  C:F9A1H         PUBLIC        _eeprom_write_boot_area
   B:0080H.0       PUBLIC        P00
   D:0099H         PUBLIC        SBUF
   D:00F5H         PUBLIC        IAP_TPS
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
-  C:F4EAH         PUBLIC        hard_init
+  C:FCEAH         PUBLIC        hard_init
   D:008EH         PUBLIC        AUXR
-  C:F4C0H         PUBLIC        INIT_MASK
+  C:FCC0H         PUBLIC        INIT_MASK
   D:00C7H         PUBLIC        IAP_CONTR
   D:0016H         PUBLIC        proj_count
   B:0088H.5       PUBLIC        TF0
@@ -151,48 +151,48 @@ SYMBOL TABLE OF MODULE:  .\Objects\bios (MAIN)
   D:00C2H         PUBLIC        IAP_DATA
   B:0088H.4       PUBLIC        TR0
   B:0088H.6       PUBLIC        TR1
-  C:F3E9H         PUBLIC        _send_num
+  C:FBE9H         PUBLIC        _send_num
   D:0018H         PUBLIC        jmp_app
   D:00C6H         PUBLIC        IAP_TRIG
   D:00D0H         PUBLIC        PSW
   -------         PROC          HARD_INIT
-  C:F4EAH         LINE#         69
-  C:F4EAH         LINE#         70
-  C:F4EDH         LINE#         71
-  C:F4F0H         LINE#         72
-  C:F4F3H         LINE#         73
-  C:F4F6H         LINE#         74
-  C:F4F9H         LINE#         75
-  C:F4FCH         LINE#         76
-  C:F4FFH         LINE#         77
-  C:F501H         LINE#         78
-  C:F503H         LINE#         79
-  C:F505H         LINE#         80
-  C:F507H         LINE#         81
-  C:F509H         LINE#         82
+  C:FCEAH         LINE#         69
+  C:FCEAH         LINE#         70
+  C:FCEDH         LINE#         71
+  C:FCF0H         LINE#         72
+  C:FCF3H         LINE#         73
+  C:FCF6H         LINE#         74
+  C:FCF9H         LINE#         75
+  C:FCFCH         LINE#         76
+  C:FCFFH         LINE#         77
+  C:FD01H         LINE#         78
+  C:FD03H         LINE#         79
+  C:FD05H         LINE#         80
+  C:FD07H         LINE#         81
+  C:FD09H         LINE#         82
   -------         ENDPROC       HARD_INIT
   -------         PROC          L?0077
   -------         ENDPROC       L?0077
   -------         PROC          _SEND_DATA
   D:0007H         SYMBOL        dat
-  C:F54BH         LINE#         92
-  C:F54BH         LINE#         93
-  C:F54DH         LINE#         94
-  C:F550H         LINE#         95
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/30/2020  22:25:38  PAGE 4
+  C:FD4BH         LINE#         92
+  C:FD4BH         LINE#         93
+  C:FD4DH         LINE#         94
+  C:FD50H         LINE#         95
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/02/2021  17:18:34  PAGE 4
 
 
-  C:F552H         LINE#         96
+  C:FD52H         LINE#         96
   -------         ENDPROC       _SEND_DATA
   -------         PROC          _SEND_STRING
   D:0006H         SYMBOL        str
-  C:F50AH         LINE#         107
-  C:F50AH         LINE#         108
-  C:F512H         LINE#         109
-  C:F51EH         LINE#         110
-  C:F521H         LINE#         111
-  C:F523H         LINE#         112
-  C:F525H         LINE#         113
+  C:FD0AH         LINE#         107
+  C:FD0AH         LINE#         108
+  C:FD12H         LINE#         109
+  C:FD1EH         LINE#         110
+  C:FD21H         LINE#         111
+  C:FD23H         LINE#         112
+  C:FD25H         LINE#         113
   -------         ENDPROC       _SEND_STRING
   -------         PROC          _SEND_NUM
   D:0009H         SYMBOL        dat
@@ -200,66 +200,66 @@ SYMBOL TABLE OF MODULE:  .\Objects\bios (MAIN)
   D:000BH         SYMBOL        n
   D:0003H         SYMBOL        i
   -------         ENDDO         
-  C:F3E9H         LINE#         123
-  C:F3EDH         LINE#         125
-  C:F3F9H         LINE#         126
-  C:F40AH         LINE#         127
-  C:F419H         LINE#         128
-  C:F41CH         LINE#         129
-  C:F420H         LINE#         130
-  C:F423H         LINE#         131
-  C:F423H         LINE#         132
-  C:F429H         LINE#         133
-  C:F42EH         LINE#         134
-  C:F42EH         LINE#         135
-  C:F436H         LINE#         136
-  C:F43EH         LINE#         137
-  C:F43EH         LINE#         138
-  C:F448H         LINE#         139
-  C:F450H         LINE#         140
-  C:F450H         LINE#         141
+  C:FBE9H         LINE#         123
+  C:FBEDH         LINE#         125
+  C:FBF9H         LINE#         126
+  C:FC0AH         LINE#         127
+  C:FC19H         LINE#         128
+  C:FC1CH         LINE#         129
+  C:FC20H         LINE#         130
+  C:FC23H         LINE#         131
+  C:FC23H         LINE#         132
+  C:FC29H         LINE#         133
+  C:FC2EH         LINE#         134
+  C:FC2EH         LINE#         135
+  C:FC36H         LINE#         136
+  C:FC3EH         LINE#         137
+  C:FC3EH         LINE#         138
+  C:FC48H         LINE#         139
+  C:FC50H         LINE#         140
+  C:FC50H         LINE#         141
   -------         ENDPROC       _SEND_NUM
   -------         PROC          EEPROM_OFF
-  C:F53AH         LINE#         153
-  C:F53AH         LINE#         154
-  C:F53DH         LINE#         155
-  C:F53FH         LINE#         156
-  C:F541H         LINE#         157
-  C:F544H         LINE#         158
-  C:F547H         LINE#         159
+  C:FD3AH         LINE#         153
+  C:FD3AH         LINE#         154
+  C:FD3DH         LINE#         155
+  C:FD3FH         LINE#         156
+  C:FD41H         LINE#         157
+  C:FD44H         LINE#         158
+  C:FD47H         LINE#         159
   -------         ENDPROC       EEPROM_OFF
   -------         PROC          _EEPROM_ERASE
   D:0006H         SYMBOL        addr
-  C:F526H         LINE#         169
-  C:F526H         LINE#         170
-  C:F529H         LINE#         171
-  C:F52CH         LINE#         172
-  C:F52EH         LINE#         173
-  C:F530H         LINE#         174
-  C:F533H         LINE#         175
-  C:F536H         LINE#         176
-  C:F537H         LINE#         177
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/30/2020  22:25:38  PAGE 5
+  C:FD26H         LINE#         169
+  C:FD26H         LINE#         170
+  C:FD29H         LINE#         171
+  C:FD2CH         LINE#         172
+  C:FD2EH         LINE#         173
+  C:FD30H         LINE#         174
+  C:FD33H         LINE#         175
+  C:FD36H         LINE#         176
+  C:FD37H         LINE#         177
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/02/2021  17:18:34  PAGE 5
 
 
   -------         ENDPROC       _EEPROM_ERASE
-  C:F4CCH         SYMBOL        L?0076
+  C:FCCCH         SYMBOL        L?0076
   -------         PROC          L?0075
   -------         ENDPROC       L?0075
-  C:F4CCH         SYMBOL        L?0076
+  C:FCCCH         SYMBOL        L?0076
   -------         PROC          _EEPROM_WRITE
   D:0006H         SYMBOL        addr
   D:0005H         SYMBOL        dat
-  C:F4D4H         LINE#         189
-  C:F4D4H         LINE#         190
-  C:F4D7H         LINE#         191
-  C:F4DAH         LINE#         192
-  C:F4DCH         LINE#         193
-  C:F4DEH         LINE#         194
-  C:F4E0H         LINE#         195
-  C:F4E3H         LINE#         196
-  C:F4E6H         LINE#         197
-  C:F4E7H         LINE#         198
+  C:FCD4H         LINE#         189
+  C:FCD4H         LINE#         190
+  C:FCD7H         LINE#         191
+  C:FCDAH         LINE#         192
+  C:FCDCH         LINE#         193
+  C:FCDEH         LINE#         194
+  C:FCE0H         LINE#         195
+  C:FCE3H         LINE#         196
+  C:FCE6H         LINE#         197
+  C:FCE7H         LINE#         198
   -------         ENDPROC       _EEPROM_WRITE
   -------         PROC          _EEPROM_WRITE_BOOT_AREA
   D:0009H         SYMBOL        addr
@@ -269,139 +269,139 @@ SYMBOL TABLE OF MODULE:  .\Objects\bios (MAIN)
   D:0010H         SYMBOL        i
   D:0012H         SYMBOL        ad
   -------         ENDDO         
-  C:F1A1H         LINE#         214
-  C:F1ABH         LINE#         216
-  C:F1B0H         LINE#         217
-  C:F1CDH         LINE#         218
-  C:F1DDH         LINE#         219
-  C:F1E4H         LINE#         220
-  C:F1EFH         LINE#         221
-  C:F1FFH         LINE#         222
-  C:F225H         LINE#         223
-  C:F22FH         LINE#         224
-  C:F234H         LINE#         225
-  C:F24EH         LINE#         226
-  C:F25DH         LINE#         227
+  C:F9A1H         LINE#         214
+  C:F9ABH         LINE#         216
+  C:F9B0H         LINE#         217
+  C:F9CDH         LINE#         218
+  C:F9DDH         LINE#         219
+  C:F9E4H         LINE#         220
+  C:F9EFH         LINE#         221
+  C:F9FFH         LINE#         222
+  C:FA25H         LINE#         223
+  C:FA2FH         LINE#         224
+  C:FA34H         LINE#         225
+  C:FA4EH         LINE#         226
+  C:FA5DH         LINE#         227
   -------         ENDPROC       _EEPROM_WRITE_BOOT_AREA
   -------         PROC          DATA_SAVE
   -------         DO            
   D:0002H         SYMBOL        i
   -------         ENDDO         
-  C:F372H         LINE#         239
-  C:F372H         LINE#         241
-  C:F37DH         LINE#         242
-  C:F389H         LINE#         243
-  C:F390H         LINE#         244
-  C:F39DH         LINE#         245
-  C:F3B0H         LINE#         246
-  C:F3B7H         LINE#         247
-  C:F3B7H         LINE#         248
-  C:F3C3H         LINE#         249
-  C:F3E1H         LINE#         250
-  C:F3E8H         LINE#         251
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/30/2020  22:25:38  PAGE 6
+  C:FB72H         LINE#         239
+  C:FB72H         LINE#         241
+  C:FB7DH         LINE#         242
+  C:FB89H         LINE#         243
+  C:FB90H         LINE#         244
+  C:FB9DH         LINE#         245
+  C:FBB0H         LINE#         246
+  C:FBB7H         LINE#         247
+  C:FBB7H         LINE#         248
+  C:FBC3H         LINE#         249
+  C:FBE1H         LINE#         250
+  C:FBE8H         LINE#         251
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/02/2021  17:18:34  PAGE 6
 
 
-  C:F3E8H         LINE#         252
+  C:FBE8H         LINE#         252
   -------         ENDPROC       DATA_SAVE
   -------         PROC          MAIN
   -------         DO            
   D:0004H         SYMBOL        i
   D:0008H         SYMBOL        timeout
   -------         ENDDO         
-  C:F000H         LINE#         254
-  C:F000H         LINE#         257
-  C:F003H         LINE#         259
-  C:F00BH         LINE#         260
-  C:F014H         LINE#         261
-  C:F016H         LINE#         262
-  C:F019H         LINE#         263
-  C:F01BH         LINE#         264
-  C:F01EH         LINE#         265
-  C:F025H         LINE#         266
-  C:F025H         LINE#         268
-  C:F03AH         LINE#         269
-  C:F042H         LINE#         270
-  C:F056H         LINE#         271
-  C:F060H         LINE#         272
-  C:F060H         LINE#         274
-  C:F063H         LINE#         275
-  C:F06AH         LINE#         276
-  C:F06DH         LINE#         277
-  C:F06FH         LINE#         278
-  C:F075H         LINE#         279
-  C:F07CH         LINE#         280
-  C:F07EH         LINE#         281
-  C:F07EH         LINE#         283
-  C:F085H         LINE#         284
-  C:F08BH         LINE#         285
-  C:F090H         LINE#         286
-  C:F097H         LINE#         287
-  C:F09AH         LINE#         288
-  C:F0ACH         LINE#         289
-  C:F0B5H         LINE#         290
-  C:F0BFH         LINE#         291
-  C:F0C6H         LINE#         292
-  C:F0CFH         LINE#         293
-  C:F0D4H         LINE#         294
-  C:F0D8H         LINE#         295
-  C:F0DFH         LINE#         296
-  C:F0E1H         LINE#         297
-  C:F0E4H         LINE#         298
-  C:F0E4H         LINE#         299
-  C:F0E7H         LINE#         300
-  C:F0EAH         LINE#         301
-  C:F0ECH         LINE#         302
-  C:F0EEH         LINE#         303
-  C:F0F2H         LINE#         304
-  C:F0F4H         LINE#         305
-  C:F0FAH         LINE#         306
-  C:F101H         LINE#         307
-  C:F108H         LINE#         308
-  C:F10FH         LINE#         309
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/30/2020  22:25:38  PAGE 7
+  C:F800H         LINE#         254
+  C:F800H         LINE#         257
+  C:F803H         LINE#         259
+  C:F80BH         LINE#         260
+  C:F814H         LINE#         261
+  C:F816H         LINE#         262
+  C:F819H         LINE#         263
+  C:F81BH         LINE#         264
+  C:F81EH         LINE#         265
+  C:F825H         LINE#         266
+  C:F825H         LINE#         268
+  C:F83AH         LINE#         269
+  C:F842H         LINE#         270
+  C:F856H         LINE#         271
+  C:F860H         LINE#         272
+  C:F860H         LINE#         274
+  C:F863H         LINE#         275
+  C:F86AH         LINE#         276
+  C:F86DH         LINE#         277
+  C:F86FH         LINE#         278
+  C:F875H         LINE#         279
+  C:F87CH         LINE#         280
+  C:F87EH         LINE#         281
+  C:F87EH         LINE#         283
+  C:F885H         LINE#         284
+  C:F88BH         LINE#         285
+  C:F890H         LINE#         286
+  C:F897H         LINE#         287
+  C:F89AH         LINE#         288
+  C:F8ACH         LINE#         289
+  C:F8B5H         LINE#         290
+  C:F8BFH         LINE#         291
+  C:F8C6H         LINE#         292
+  C:F8CFH         LINE#         293
+  C:F8D4H         LINE#         294
+  C:F8D8H         LINE#         295
+  C:F8DFH         LINE#         296
+  C:F8E1H         LINE#         297
+  C:F8E4H         LINE#         298
+  C:F8E4H         LINE#         299
+  C:F8E7H         LINE#         300
+  C:F8EAH         LINE#         301
+  C:F8ECH         LINE#         302
+  C:F8EEH         LINE#         303
+  C:F8F2H         LINE#         304
+  C:F8F4H         LINE#         305
+  C:F8FAH         LINE#         306
+  C:F901H         LINE#         307
+  C:F908H         LINE#         308
+  C:F90FH         LINE#         309
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  01/02/2021  17:18:34  PAGE 7
 
 
-  C:F112H         LINE#         310
-  C:F11CH         LINE#         311
-  C:F122H         LINE#         312
-  C:F129H         LINE#         313
-  C:F12CH         LINE#         314
-  C:F12EH         LINE#         315
-  C:F135H         LINE#         316
-  C:F14AH         LINE#         317
-  C:F14AH         LINE#         318
-  C:F151H         LINE#         319
-  C:F151H         LINE#         320
-  C:F151H         LINE#         321
-  C:F153H         LINE#         322
-  C:F155H         LINE#         323
-  C:F157H         LINE#         324
-  C:F16EH         LINE#         325
-  C:F176H         LINE#         326
-  C:F17FH         LINE#         327
-  C:F182H         LINE#         328
-  C:F187H         LINE#         329
-  C:F187H         LINE#         330
-  C:F192H         LINE#         331
-  C:F199H         LINE#         332
-  C:F19BH         LINE#         333
-  C:F19BH         LINE#         334
-  C:F19EH         LINE#         335
+  C:F912H         LINE#         310
+  C:F91CH         LINE#         311
+  C:F922H         LINE#         312
+  C:F929H         LINE#         313
+  C:F92CH         LINE#         314
+  C:F92EH         LINE#         315
+  C:F935H         LINE#         316
+  C:F94AH         LINE#         317
+  C:F94AH         LINE#         318
+  C:F951H         LINE#         319
+  C:F951H         LINE#         320
+  C:F951H         LINE#         321
+  C:F953H         LINE#         322
+  C:F955H         LINE#         323
+  C:F957H         LINE#         324
+  C:F96EH         LINE#         325
+  C:F976H         LINE#         326
+  C:F97FH         LINE#         327
+  C:F982H         LINE#         328
+  C:F987H         LINE#         329
+  C:F987H         LINE#         330
+  C:F992H         LINE#         331
+  C:F999H         LINE#         332
+  C:F99BH         LINE#         333
+  C:F99BH         LINE#         334
+  C:F99EH         LINE#         335
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
   -------         MODULE        ?C?CLDOPTR
-  C:F2EAH         PUBLIC        ?C?CLDOPTR
+  C:FAEAH         PUBLIC        ?C?CLDOPTR
   -------         ENDMOD        ?C?CLDOPTR
 
   -------         MODULE        ?C?UIDIV
-  C:F317H         PUBLIC        ?C?UIDIV
+  C:FB17H         PUBLIC        ?C?UIDIV
   -------         ENDMOD        ?C?UIDIV
 
   -------         MODULE        ?C?ICALL
-  C:F36CH         PUBLIC        ?C?ICALL
-  C:F370H         PUBLIC        ?C?ICALL2
+  C:FB6CH         PUBLIC        ?C?ICALL
+  C:FB70H         PUBLIC        ?C?ICALL2
   -------         ENDMOD        ?C?ICALL
 
 Program Size: data=28.0 xdata=512 code=1375
