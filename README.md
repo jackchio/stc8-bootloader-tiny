@@ -76,4 +76,87 @@ BootLoader运行的原理就是“接收数据->写到FLASH”。因此可以自
 3. **返回的接收字节数和发送的字节数不一样**，说明在接收256字节时，上位机（串口助手）没有给足够的时间让单片机保存数据，由于单片机在写入Flash的时候，CPU会停止响应中断，所以会漏掉数据。因此如果使用串口下载的话，推荐使用SSCOM，SSCOM有的发送文件延时功能能很好解决这个问题。
 4. **收到“[Overflow]”**，说明接收的数据量已经超过了单片机的储存空间，单片机进入锁定状态。进入锁定状态之后不可再接收数据，此时必须重启单片机才行。
 
+### 关于BOOT脚
+#### 修改BOOT脚映射
+在main.c的第9行。
+```c
+#define	BOOT_PIN	P00	//BOOT脚设置为P0.0脚。
+```
+修改宏定义BOOT_PIN即可将指定一个IO口设置成BOOT脚。
+#### 修改BOOT脚逻辑
+在main.c的第10行。
+```c
+#define	BOOT_RUN_APP	0	//BOOT脚为低电平的时候运行APP。
+```
+- 修改宏定义BOOT_RUN_APP为0，代表BOOT脚为低电平的时候运行APP。
+- 修改宏定义BOOT_RUN_APP为1，代表BOOT脚为高电平的时候运行APP。
+#### 取消BOOT脚检测
+删除main.c的第8行到第10行。
+```c
+/*-----------------------------------------BOOT脚定义-----------------------------------------*/
+#define	BOOT_PIN		P00	//BOOT脚设置为P0.0脚。
+#define	BOOT_RUN_APP	0	//BOOT脚为低电平的时候运行APP。
+```
+修改main.c的第267行到272行的APP检测代码。
+```c
+/*------------------------------------------APP检测---------------------------------------*/	
+jmp_app=(u32)read_boot_addr;				//默认把BootLoader的地址给APP地址。防止乱跳转。
+if((read_app__flag&PD_APP__OK)==APP__OK){	//判断程序是否合法。
+	jmp_app=(u32)read_app__addr;			//程序合法，则将APP跳转地址给跳转函数。
+	if(BOOT_PIN==BOOT_RUN_APP){jmp_app();}	//BOOT脚是能跳转到APP的电平就跳转到APP。
+}
+```
 
+### 如何修改FLASH容量
+实例代码以64K Flash的芯片为主，如果是17K Flash的芯片那么需要修改以下几个地方。
+#### 修改状态保存地址
+BootLoader程序存放在芯片地址最后2K地址中，而BootLoader程序状态保存在这2K里的最后一个扇区中。由于一个扇区是512字节，所以对于64K的芯片来说，就是从地址0xFE00开始的。
+```c
+#define	BOOT_STATUS		0xFE00	//FE00		：BootLoader区状态
+#define	BOOT_JMP_ADDR	0xFE01	//FE01~FE02	：BootLoader的跳转地址
+#define	APP_START		0xFE03	//FE03		：APP区起始地址
+#define	APP_MAX			5		//APP区占用空间为5字节
+#define	APP_STATUS		0xFE03	//FE03		：APP区状态
+#define	APP_SIZE		0xFE04	//FE04~FE05	：APP区大小
+#define	APP_JMP_ADDR	0xFE06	//FE06~FE07	：APP地址
+```
+如果要修改，就修改main.c里的第15行到第22行。地址不一定要连续，但是要保证不会重合！
+比如换成17K Flash的芯片，BOOT_STATUS可修改成0x4200。其他以此类推。
+#### 修改APP扇区数量
+Flash容量变化后，其APP占用的扇区数量肯定也会有变化。修改main.c第24行即可。
+```c
+#define	DATA_MAX	124		//APP区的最大值，单位为扇区数。一扇区为512字节。
+```
+比如当前是将地址的最后2K划给BootLoader程序使用，那么就是用掉4个扇区。64K的地址一共有128个扇区，于是DATA_MAX设置为124。
+因此当**BootLoader程序变大**或者**换成17K Flash的芯片**时，可按实际情况减小DATA_MAX的值。
+### 如何修改时钟
+本程序默认跑在24MHz时钟频率下，如果考虑*低功耗*要降频或者考虑*高性能*要升频。那么需要注意以下几个和时钟有关的地方。
+#### 修改内置RC时钟
+在STC-ISP工具上修改实际所需的频率。
+#### 修改定时器初值
+修改main.c里第71行到第74行，具体代码可以由STC-ISP工具生成。定时器需要设置为20ms中断一次。
+```c
+AUXR = 0x40;	//定时器1时钟为Fosc,即1T
+TMOD = 0x00;	//设定定时器1为16位自动重装方式
+TL0 = 0xC0;		//设置定时初值
+TH0 = 0x63;		//20ms
+```
+#### 修改波特率
+单纯的修改波特率和修改主时钟都会影响到波特率，所以都要注意。
+修改main.c第75行和76行。
+```c
+TL1 = 0xCC;		//设定初值
+TH1 = 0xFF;		//设定初值
+```
+#### STC8A和STC8F的EEPROM
+这两个型号的eeprom擦写等待时间在寄存器IAP_CONTR中，需要修改main.c里第170行和第190行。
+```c
+IAP_CONTR = 0x81;//使能IAP
+```
+具体修改值可以参考STC8F和STC8A的数据手册。
+#### STC8G和STC8H的EEPROM
+这两个型号的eeprom擦写等待时间在寄存器IAP_TPS中，需要修改main.c里第257行。
+```c
+IAP_TPS=24;//STC8G和STC8H的设置，默认24MHz。
+```
+修改值为以MHz为单位的四舍五入取整值，比如时钟为11.0592MHz，四舍五入取整为11。
