@@ -52,12 +52,12 @@ STC8A8K64S4A12，占用P0.0作为BOOT脚。
 3. 实例代码中的定时器和波特率都是按照24MHz来设置的，建议选择24MHz。如果选择了其他的频率，需要修改代码。
 4. **务必记得将eeprom空间设置到该型号最大值（*比如STC8A8K64S4A12最大值是64K*）。**然后点击下载再冷启动即可。
 5. 下载成功之后，BOOT端就准备完成。当前的板子就已经支持iap下载了。
-![使用STC-ISP下载BootLoader](https://gitee.com/jackchio/stc8-bootloader-tiny/raw/master/%E5%9B%BE%E7%89%87/stc-isp%E8%AE%BE%E7%BD%AE.gif "使用STC-ISP下载BootLoader")
+![使用STC-ISP下载BootLoader](https://gitee.com/ecbm/stc8-bootloader-tiny/raw/master/%E5%9B%BE%E7%89%87/stc-isp%E8%AE%BE%E7%BD%AE.gif "使用STC-ISP下载BootLoader")
 
 ### APP端准备工作
 1. APP端不用做太多的设置，只是当前BootLoader只支持bin文件，所以得把keil生成的hex文件转换成bin文件。
 2. 用stc-isp工具打开APP程序文件后，点击程序文件窗口右下角的“保存数据”，然后保存成bin格式就行。
-![hex转bin](https://gitee.com/jackchio/stc8-bootloader-tiny/raw/master/%E5%9B%BE%E7%89%87/hex%E8%BD%ACbin.gif "hex转bin")
+![hex转bin](https://gitee.com/ecbm/stc8-bootloader-tiny/raw/master/%E5%9B%BE%E7%89%87/hex%E8%BD%ACbin.gif "hex转bin")
 
 ### 下载APP步骤
 BootLoader运行的原理就是“接收数据->写到FLASH”。因此可以自己改造成SPI下载或者IIC下载的版本。目前本例用的是串口，因此需要用到串口助手。推荐使用SSCOM，因为它在发送数据会有个延时，BootLoader程序会在这个延时里将接收到数据写入到Flash中。
@@ -68,7 +68,7 @@ BootLoader运行的原理就是“接收数据->写到FLASH”。因此可以自
 5. 发送英文字符‘!’解锁，请留意输入法不要输入中文字符‘！’。虽然长得很像，但是从编码来说，英文字符占一个字节，中文字符占两个字节。
 6. 解锁成功后，单片机会在串口上发送“[Erase]”，这表示程序正在擦除Flash，原来的APP在这一步会被擦除掉。不一会便会显示“[Start]”，此时只需点击SSCOM的“发送文件”就可以把bin文件下载到单片机中。
 7. 接收之后，会在串口上返回接收的字节数用于对比。然后就会自动运行APP。之后只要BOOT脚拉低就可以一直运行APP了。
-![APP下载](https://gitee.com/jackchio/stc8-bootloader-tiny/raw/master/%E5%9B%BE%E7%89%87/bin%E4%B8%8B%E8%BD%BD.gif)
+![APP下载](https://gitee.com/ecbm/stc8-bootloader-tiny/raw/master/%E5%9B%BE%E7%89%87/bin%E4%B8%8B%E8%BD%BD.gif)
 
 ### 异常情况
 1. **收到“[Time Out]”**，这是因为BootLoader程序不能无限制的死等，所以单片机在发送“[Start]”之后会等待2秒，2秒内没有收到任何数据的话就进入超时状态。一般超时后会自动重启BootLoader程序，所以此时再发送一次‘!’就行。
